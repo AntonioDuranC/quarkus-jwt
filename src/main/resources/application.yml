@@ -1,0 +1,16 @@
+application:
+  auth-api:
+    email: ${app.config.email}
+    password: ${app.config.password}
+quarkus:
+  rest-client:
+    escuelajs-api:
+      url: https://api.escuelajs.co
+      scope: jakarta.inject.Singleton
+      tls-configuration-name: insecure
+  http:
+    port: 8500
+  tls:
+    insecure:
+      trust-all: true
+      hostname-verification-algorithm: NONE

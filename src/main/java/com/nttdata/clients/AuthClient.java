@@ -1,7 +1,7 @@
-package com.nttdata.apps.authprofile.clients;
+package com.nttdata.clients;
 
-import com.nttdata.apps.authprofile.clients.dto.AuthRequest;
-import com.nttdata.apps.authprofile.clients.dto.AuthResponse;
+import com.nttdata.dto.AuthRequest;
+import com.nttdata.dto.AuthResponse;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

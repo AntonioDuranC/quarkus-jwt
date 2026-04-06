@@ -1,6 +1,6 @@
-package com.nttdata.apps.authprofile.clients;
+package com.nttdata.clients;
 
-import com.nttdata.apps.authprofile.clients.dto.ProfileResponse;
+import com.nttdata.dto.ProfileResponse;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 

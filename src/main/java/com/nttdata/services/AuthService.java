@@ -1,10 +1,10 @@
-package com.nttdata.apps.authprofile.services;
+package com.nttdata.services;
 
-import com.nttdata.apps.authprofile.clients.AuthClient;
-import com.nttdata.apps.authprofile.clients.ProfileClient;
-import com.nttdata.apps.authprofile.clients.dto.AuthRequest;
-import com.nttdata.apps.authprofile.clients.dto.AuthResponse;
-import com.nttdata.apps.authprofile.clients.dto.ProfileResponse;
+import com.nttdata.clients.AuthClient;
+import com.nttdata.clients.ProfileClient;
+import com.nttdata.dto.AuthRequest;
+import com.nttdata.dto.AuthResponse;
+import com.nttdata.dto.ProfileResponse;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

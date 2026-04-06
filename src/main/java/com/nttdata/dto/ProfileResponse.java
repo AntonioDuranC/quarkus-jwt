@@ -1,4 +1,4 @@
-package com.nttdata.apps.authprofile.clients.dto;
+package com.nttdata.dto;
 
 public record ProfileResponse(
         String id,

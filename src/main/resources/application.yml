@@ -10,28 +10,73 @@ quarkus:
     password: root
     jdbc:
       url: jdbc:mariadb://localhost:3306/exchange_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+
   hibernate-orm:
     database:
       generation: update
     log:
       sql: true
+
   rest-client:
     escuelajs-api:
       url: https://api.escuelajs.co
       scope: jakarta.inject.Singleton
       tls-configuration-name: insecure
+
     currency-freaks:
       url: https://api.currencyfreaks.com
       connect-timeout: 5000
       read-timeout: 10000
+
   http:
     port: 8500
+
   tls:
     insecure:
       trust-all: true
       hostname-verification-algorithm: NONE
 
-# Rest Client
+  # Configuración global de Kafka para SmallRye
+  kafka:
+    devservices:
+      enabled: false # Desactivamos Dev Services para usar tu Docker Compose
+    snappy:
+      enabled: true
+
+# API KEY EXTERNA
 currency:
   freaks:
     api-key: c024d02b82c64b7cbfd0cca7f6a75732
+
+# Configuración de Mensajería Reactiva (SmallRye)
+mp:
+  messaging:
+    connector:
+      smallrye-kafka:
+        bootstrap:
+          servers: localhost:9092 # Conecta al listener EXTERNAL de tu Docker
+
+    # CANAL DE SALIDA (Para el KafkaProducerService)
+    outgoing:
+      exchange-out:
+        connector: smallrye-kafka
+        topic: exchange-topic
+        value:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+        acks: all
+        retries: 3
+        enable:
+          idempotence: true
+
+    # CANAL DE ENTRADA (Para el KafkaConsumerService)
+    incoming:
+      exchange-in:
+        connector: smallrye-kafka
+        topic: exchange-topic
+        value:
+          deserializer: com.nttdata.kafka.ExchangeEventDeserializer
+        auto:
+          offset:
+            reset: earliest # Lee desde el inicio si el grupo es nuevo
+        group:
+          id: exchange-service-group

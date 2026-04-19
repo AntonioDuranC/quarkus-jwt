@@ -1,7 +1,6 @@
 package com.nttdata.services;
 
 import com.nttdata.clients.AuthClient;
-import com.nttdata.clients.ProfileClient;
 import com.nttdata.dto.AuthRequest;
 import com.nttdata.dto.AuthResponse;
 import com.nttdata.dto.ProfileResponse;
@@ -23,10 +22,6 @@ public class AuthService {
     @RestClient
     AuthClient authClient;
 
-    @Inject
-    @RestClient
-    ProfileClient profileClient;
-
     public AuthResponse login() {
         return authClient.login(new AuthRequest(
                 email, password
@@ -37,7 +32,7 @@ public class AuthService {
         var response = authClient.login(new AuthRequest(
                 email, password
         ));
-
-        return profileClient.getProfile("Bearer " + response.accesToken());
+        //Verificamos que el token es válido
+        return authClient.getProfile("Bearer " + response.accesToken());
     }
 }

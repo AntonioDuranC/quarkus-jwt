@@ -2,9 +2,7 @@ package com.nttdata.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,9 +28,23 @@ public class ExchangeQueryRecord extends PanacheEntityBase {
     @Column(name = "query_date", nullable = false)
     public LocalDate queryDate;
 
-    public ExchangeQueryRecord(String dni, LocalDateTime queriedAt, LocalDate queryDate) {
+    @Column(name = "rate", nullable = false)
+    public Double ratePen;
+
+    public ExchangeQueryRecord(String dni, LocalDateTime queriedAt, LocalDate queryDate, Double ratePen) {
         this.dni = dni;
         this.queriedAt = queriedAt;
         this.queryDate = queryDate;
+        this.ratePen = ratePen;
+    }
+
+    @Override
+    public String toString() {
+        return "ExchangeQueryRecord{" +
+                "dni='" + dni + '\'' +
+                ", queriedAt=" + queriedAt +
+                ", queryDate=" + queryDate +
+                ", ratePen=" + ratePen +
+                '}';
     }
 }

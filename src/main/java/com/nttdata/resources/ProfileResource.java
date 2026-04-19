@@ -38,6 +38,7 @@ public class ProfileResource {
     public Response getProfileData() {
         LOG.info("Entramos al endpoint /data...");
 
+        //Verificamos el token que se genero en el endpoint: /api/profile/token
         return Response.ok(authService.getProfile()
         ).build();
     }

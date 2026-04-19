@@ -2,10 +2,8 @@ package com.nttdata.clients;
 
 import com.nttdata.dto.AuthRequest;
 import com.nttdata.dto.AuthResponse;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import com.nttdata.dto.ProfileResponse;
+import jakarta.ws.rs.*;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -19,4 +17,11 @@ public interface AuthClient {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     AuthResponse login(AuthRequest request);
+
+
+    @Path("/profile")
+    @GET
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    ProfileResponse getProfile(@HeaderParam("Authorization") String authorization);
 }
